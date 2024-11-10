@@ -92,3 +92,8 @@ namespace Agriculture_app
 }
 
 -----------------sign up page end-----------------
+
+
+
+
+

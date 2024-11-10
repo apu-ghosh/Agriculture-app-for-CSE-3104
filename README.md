@@ -96,4 +96,48 @@ namespace Agriculture_app
 
 
 
+---------------main window-----------------------
 
+public partial class MainWindow : Window
+{
+    string pro = "server=localhost;user=root;database=project3104;password=";
+    public MainWindow()
+    {
+        
+        InitializeComponent();
+    }
+    
+  
+    private void sign_up_button_Click(object sender, RoutedEventArgs e)
+    {
+        sign_up su = new sign_up();
+        su.Show();
+        this.Close();
+    }
+
+    private void admin_buttion_Click(object sender, RoutedEventArgs e)
+    {
+        
+            if (nid_number_box.Text == "" && password_box.Text == " ")
+            {
+                MessageBox.Show("Missing Information");
+            }
+            else if (nid_number_box.Text == "12345678" && password_box.Text == "2024")
+            {
+                admin_page ap = new admin_page();
+                ap.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Please Enter The Correct  Username And Password");
+            }
+        
+    }
+}
+
+
+
+
+
+-----------------end main window----------------------

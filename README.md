@@ -93,6 +93,187 @@ namespace Agriculture_app
 
 -----------------sign up page end-----------------
 
+--------------- start Admin page ---------------------
+public partial class admin_page : Window
+{
+    public admin_page()
+    {
+        InitializeComponent();
+    }
+
+
+    private void logout_button_Click(object sender, RoutedEventArgs e)
+    {
+        MainWindow mw = new MainWindow();
+        mw.Show();
+        this.Close();
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        home_page hp = new home_page();
+        hp.Show();
+        this.Close();
+    }
+
+    private void scheduling_button_Click(object sender, RoutedEventArgs e)
+    {
+        scheduling_page sp = new scheduling_page();
+        sp.Show();
+        this.Close();
+    }
+
+    private void instruction_button_Click(object sender, RoutedEventArgs e)
+    {
+        instruction_page ip = new instruction_page();
+        ip.Show();
+        this.Close();
+    }
+
+    // insert data in sql table--------------------
+    private void insert_button_Click(object sender, RoutedEventArgs e)
+    {
+        string pro = "server=localhost;user=root;database=project3104;password=";
+        MySqlConnection conn = new MySqlConnection(pro);
+        try
+        {
+
+            conn.Open();
+            MessageBox.Show("Successful");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+        finally { conn.Close(); }
+
+        string sn = textbox1.Text;
+        string cp = textbox2.Text;
+        string td = textbox3.Text;
+        string ft = textbox4.Text;
+
+
+        try
+        {
+            if (insert_combobox.Text == "rice")
+            {
+                conn.Open();
+                string ins = "insert into rice(Crop_Varieties_Name,Planting_Time,Type_of_Disease,Fertilizer_Application_time) values('" + sn + "','" + cp + "','" + td + "','" + ft + "')";
+                MySqlCommand cmd = new MySqlCommand(ins, conn);
+                int i = cmd.ExecuteNonQuery();
+                MessageBox.Show("Data has inserted successfully...");
+
+            }
+            else if (insert_combobox.Text == "potato")
+            {
+                conn.Open();
+                string ins = "insert into potato(Crop_Varieties_Name,Planting_Time,Type_of_Disease,Fertilizer_Application_time) values('" + sn + "','" + cp + "','" + td + "','" + ft + "')";
+                MySqlCommand cmd = new MySqlCommand(ins, conn);
+                int i = cmd.ExecuteNonQuery();
+                MessageBox.Show("Data has inserted successfully...");
+
+            }
+
+            else
+            {
+                MessageBox.Show("Select Right Table");
+
+            }
+
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+        finally { conn.Close(); }
+
+
+        insert_combobox.Text = "Select Table";
+        textbox1.Text = "";
+        textbox2.Text = "";
+        textbox3.Text = "";
+        textbox4.Text = "";
+    }
+
+    private void delete_button_Click(object sender, RoutedEventArgs e)
+    {
+
+        var a = (ComboBoxItem)delete_combobox_text.SelectedItem;
+        string delete_data = (string)a.Content;
+        string ddt = delet_data_text.Text;
+
+
+        string s = "server= localhost; user= root; database= project3104; password =";
+        MySqlConnection con = new MySqlConnection(s);
+
+        if (delete_data == "farmer_info")
+        {
+
+            try
+            {
+                con.Open();
+                MessageBox.Show("Successful");
+                string del = "delete from farmer_info where User_Name = '" + ddt + "'";
+                MySqlCommand cmd = new MySqlCommand(del, con);
+                int i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        else if (delete_data == "potato")
+        {
+            try
+            {
+                con.Open();
+                MessageBox.Show("Successful");
+                string del = "delete from potato where Crop_Varieties_Name = '" + ddt + "'";
+                MySqlCommand cmd = new MySqlCommand(del, con);
+                int i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        else if (delete_data == "rice")
+        {
+            try
+            {
+                con.Open();
+                MessageBox.Show("Successful");
+                string del = "delete from rice where Crop_Varieties_Name = '" + ddt + "'";
+                MySqlCommand cmd = new MySqlCommand(del, con);
+                int i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        else
+        {
+            con.Open();
+            MessageBox.Show("Select your table ");
+        }
+       
+        delet_data_text.Text = "";
+
+
+    }
+
+}
+
+
+
+
+-----------------End Admin page ------------------
+
+
 
 
 
@@ -175,5 +356,7 @@ public partial class home_page : Window
          this.Close();
      }
  }
+
+ 
  ----------------end home page-=----------------------
  

@@ -359,4 +359,81 @@ public partial class home_page : Window
 
  
  ----------------end home page-=----------------------
+
  
+ ---------------instruction page----------------------
+
+ public partial class instruction_page : Window
+ {
+     public instruction_page()
+     {
+         InitializeComponent();
+     }
+
+     private void back_button_Click(object sender, RoutedEventArgs e)
+     {
+         home_page hp = new home_page();
+         hp.Show();
+         this.Close();
+     }
+
+     private void Button_Click(object sender, RoutedEventArgs e)
+     {
+        MainWindow mw = new MainWindow();
+         mw.Show();
+         this.Close();
+     }
+
+     private void Button_Click_1(object sender, RoutedEventArgs e)
+     {
+         var a = (ComboBoxItem)select_itembox.SelectedItem;
+         string table_name = (string)a.Content;
+
+         string s = "server= localhost; user= root; database=project3104; password =";
+         MySqlConnection con = new MySqlConnection(s);
+         con.Open();
+
+         if (table_name == "rice")
+         {
+             MySqlCommand cmd = new MySqlCommand("select * from rice", con);
+             MySqlDataReader reader = cmd.ExecuteReader();
+             while (reader.Read())
+             {
+                 show_data_box.Text = show_data_box.Text + reader[0].ToString();
+                 show_data_box.Text = show_data_box.Text + "   " + reader[1].ToString() + "" + "";
+                 show_data_box.Text = show_data_box.Text + "   " + reader[2].ToString() + "" + "";
+                 show_data_box.Text = show_data_box.Text + "   " + reader[3].ToString() + "" + "\n\n";
+                 
+                
+             }
+
+         }
+         else if (table_name == "potato")
+         {
+
+             MySqlCommand cmd = new MySqlCommand("select * from potato", con);
+             MySqlDataReader reader = cmd.ExecuteReader();
+             while (reader.Read())
+             {
+                 show_data_box.Text = show_data_box.Text + reader[0].ToString();
+                 show_data_box.Text = show_data_box.Text + "   " + reader[1].ToString() + "" + "";
+                 show_data_box.Text = show_data_box.Text + "   " + reader[2].ToString() + "" + "";
+                 show_data_box.Text = show_data_box.Text + "   " + reader[3].ToString() + "" + "\n";
+                
+                 
+             }
+         }
+         else
+         {
+             MessageBox.Show("Select Right Table");
+
+         }
+     }
+
+     private void data_clear_button_Click(object sender, RoutedEventArgs e)
+     {
+         show_data_box.Text = "";
+         select_itembox.Text = "";
+     }
+ }
+-------------------------end instruction page------------------------------

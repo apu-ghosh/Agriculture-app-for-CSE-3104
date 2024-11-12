@@ -141,3 +141,39 @@ public partial class MainWindow : Window
 
 
 -----------------end main window----------------------
+
+
+
+-----------------home page----------------------------
+
+public partial class home_page : Window
+ {
+     public home_page()
+     {
+         InitializeComponent();
+     }
+
+     private void logout_Click(object sender, RoutedEventArgs e)
+     {
+         MainWindow mw = new MainWindow();
+         mw.Show();
+         this.Close();
+     }
+
+     private void button_1_Click(object sender, RoutedEventArgs e)
+     {
+         
+         scheduling_page sp = new scheduling_page();
+         sp.Show();
+         this.Close();   
+     }
+
+     private void button_3_Click(object sender, RoutedEventArgs e)
+     {
+         instruction_page ip = new instruction_page();
+         ip.Show();
+         this.Close();
+     }
+ }
+ ----------------end home page-=----------------------
+ 

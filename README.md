@@ -303,7 +303,7 @@ public partial class MainWindow : Window
             {
                 MessageBox.Show("Missing Information");
             }
-            else if (nid_number_box.Text == "12345678" && password_box.Text == "2024")
+            else if (nid_number_box.Text == "apu123" && password_box.Text == "2024")
             {
                 admin_page ap = new admin_page();
                 ap.Show();

@@ -318,6 +318,56 @@ public partial class MainWindow : Window
 }
 
 
+ private void login_button_Click(object sender, RoutedEventArgs e)
+ {
+     // Database connection string
+     // string connectionString = "Server=localhost;Database=project3104;Uid=root;Pwd=your_password;";
+     //string pro = "server=localhost;user=root;database=project3104;password=";
+
+     string un = user_name.Text;
+     string pass = password.Text;
+
+
+
+     // private bool AuthenticateUser(string user_name, string password)
+     {
+         // bool isAuthenticated = false;
+
+         // Create MySQL connection
+         using (MySqlConnection conn = new MySqlConnection(pro))
+         {
+             try
+             {
+                 conn.Open();
+
+                 // Query to check if the email and password match
+                 string query = "SELECT COUNT(*) FROM farmer_info WHERE User_Name = @user_name AND Password = @password";
+                 MySqlCommand cmd = new MySqlCommand(query, conn);
+                 cmd.Parameters.AddWithValue("@user_name", user_name);
+                 cmd.Parameters.AddWithValue("@password", password); // In production, you should hash the password
+
+                 int userCount = Convert.ToInt32(cmd.ExecuteScalar());
+
+                 // If the count is greater than 0, the user exists
+                 if (user_name.Text == "User_Name" && password.Text == "Password ")
+                 {
+                     // isAuthenticated = true;
+                     home_page hp = new home_page();
+                     hp.Show();
+                     this.Close();
+                 }
+                 else
+                 {
+                     MessageBox.Show("Invalid User_Name or password.", "Error");
+                 }
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show("Error: " + ex.Message);
+             }
+         }
+
+
 
 
 

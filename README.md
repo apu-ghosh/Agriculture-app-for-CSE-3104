@@ -434,55 +434,75 @@ public partial class home_page : Window
          this.Close();
      }
 
-     private void Button_Click_1(object sender, RoutedEventArgs e)
-     {
-         var a = (ComboBoxItem)select_itembox.SelectedItem;
-         string table_name = (string)a.Content;
+ var a = (ComboBoxItem)select_itembox.SelectedItem;
+ string table_name = (string)a.Content;
 
-         string s = "server= localhost; user= root; database=project3104; password =";
-         MySqlConnection con = new MySqlConnection(s);
-         con.Open();
+ // Connection string
+ string connectionString = "server=localhost;user=root;database=project3104;password=";
+ using (MySqlConnection con = new MySqlConnection(connectionString))
+     try
+     {
+
 
          if (table_name == "rice")
          {
-             MySqlCommand cmd = new MySqlCommand("select * from rice", con);
-             MySqlDataReader reader = cmd.ExecuteReader();
-             while (reader.Read())
+             con.Open();
+
+             // Query to fetch all data from the selected table
+             string query = "SELECT * FROM rice";
+
+             using (MySqlCommand cmd = new MySqlCommand(query, con))
+             using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
              {
-                 show_data_box.Text = show_data_box.Text + reader[0].ToString();
-                 show_data_box.Text = show_data_box.Text + "   " + reader[1].ToString() + "" + "";
-                 show_data_box.Text = show_data_box.Text + "   " + reader[2].ToString() + "" + "";
-                 show_data_box.Text = show_data_box.Text + "   " + reader[3].ToString() + "" + "\n\n";
-                 
-                
+                 // Load data into a DataTable
+                 DataTable dataTable = new DataTable();
+                 adapter.Fill(dataTable);
+
+                 // Bind the DataTable to the DataGridView
+                 dataGridView1.ItemsSource = dataTable.DefaultView;
+                 con.Close();
              }
 
+
          }
+
          else if (table_name == "potato")
          {
 
-             MySqlCommand cmd = new MySqlCommand("select * from potato", con);
-             MySqlDataReader reader = cmd.ExecuteReader();
-             while (reader.Read())
+             // Query to fetch all data from the selected table
+             string query = "SELECT * FROM potato";
+
+             using (MySqlCommand cmd = new MySqlCommand(query, con))
+             using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
              {
-                 show_data_box.Text = show_data_box.Text + reader[0].ToString();
-                 show_data_box.Text = show_data_box.Text + "   " + reader[1].ToString() + "" + "";
-                 show_data_box.Text = show_data_box.Text + "   " + reader[2].ToString() + "" + "";
-                 show_data_box.Text = show_data_box.Text + "   " + reader[3].ToString() + "" + "\n";
-                
-                 
+                 // Load data into a DataTable
+                 DataTable dataTable = new DataTable();
+                 adapter.Fill(dataTable);
+
+                 // Bind the DataTable to the DataGridView
+                 dataGridView1.ItemsSource = dataTable.DefaultView;
+                 con.Close();
              }
+
+
          }
          else
          {
-             MessageBox.Show("Select Right Table");
-
+             MessageBox.Show("Please select a valid table name.");
+             return;
          }
+
+
+     }
+     catch (Exception ex)
+     {
+         MessageBox.Show($"An error occurred: {ex.Message}");
+     }
      }
 
      private void data_clear_button_Click(object sender, RoutedEventArgs e)
      {
-         show_data_box.Text = "";
+         dataGridView1.ItemsSource = "";
          select_itembox.Text = "";
      }
  }

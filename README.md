@@ -1,7 +1,30 @@
 # Agriculture-app-for-CSE-3104
 // Agriculture app
 ---------------main window-----------------------
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
+
+using System.Data.SqlClient;
+
+namespace Agriculture_app
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
 public partial class MainWindow : Window
 {
     string pro = "server=localhost;user=root;database=project3104;password=";
@@ -78,11 +101,10 @@ public partial class MainWindow : Window
                  MessageBox.Show("Error: " + ex.Message);
              }
          }
+    }
+
+ }
 }
-
-}
-
-
  
 
 
@@ -148,17 +170,23 @@ namespace Agriculture_app
             string dist = district.Text;
             
             string th = thana.Text;
+            string un = user_name.Text;
+             string pass = password1.Text;
             
 
-            int m = Int32.Parse(mobile.Text);
-            int nid = Int32.Parse(nid_number.Text);
+            string m = mobile.Text;
+           string nid = nid_number.Text;
+
+          var a = (ComboBoxItem)occupation_combobox.SelectedItem;
+          string oc = (string)a.Content;
 
             try
             {
                // string ss = "server=localhost; user=root; database=project3104; password =";
 
                 conn.Open();
-                string ins = "insert into user_info (Name,Division,District,Thana,Mobile,NID_number) values ('" + n + "','" + div + "','" + dist + "','" + th + "','" + m + "','" + nid + "')";
+                 string ins = "insert into user_info (Name,Division,District,Thana,Occupation,Mobile,NID_number,User_Name,Password) values ('" + n + "','" + div + "','" + dist + "','" + 
+                th + "','" + oc + "','" + m + "','" + nid + "','" + un + "','" + pass + "')";
                 MySqlCommand cmd = new MySqlCommand(ins, conn);
                 int i = cmd.ExecuteNonQuery();
                 MessageBox.Show("Data has inserted successfully...");
@@ -360,8 +388,189 @@ public partial class admin_page : Window
 
     }
 
-}
+      private void Button_Click_1(object sender, RoutedEventArgs e)
+  {
+      var a = (ComboBoxItem)select_combobox_text.SelectedItem;
+      string table_name = (string)a.Content;
 
+      // Connection string
+      string connectionString = "server=localhost;user=root;database=project3104;password=";
+      using (MySqlConnection con = new MySqlConnection(connectionString))
+          try
+          {
+
+
+              if (table_name == "rice")
+              {
+                  con.Open();
+
+                  // Query to fetch all data from the selected table
+                  string query = "SELECT * FROM rice";
+
+                  using (MySqlCommand cmd = new MySqlCommand(query, con))
+                  using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                  {
+                      // Load data into a DataTable
+                      DataTable dataTable = new DataTable();
+                      adapter.Fill(dataTable);
+
+                      // Bind the DataTable to the DataGridView
+                      dataGridView1.ItemsSource = dataTable.DefaultView;
+                      con.Close();
+                  }
+
+
+              }
+
+              else if (table_name == "potato")
+              {
+
+                  // Query to fetch all data from the selected table
+                  string query = "SELECT * FROM potato";
+
+                  using (MySqlCommand cmd = new MySqlCommand(query, con))
+                  using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                  {
+                      // Load data into a DataTable
+                      DataTable dataTable = new DataTable();
+                      adapter.Fill(dataTable);
+
+                      // Bind the DataTable to the DataGridView
+                      dataGridView1.ItemsSource = dataTable.DefaultView;
+                      con.Close();
+                  }
+
+
+              }
+              else if (table_name == "user_info")
+              {
+
+                  // Query to fetch all data from the selected table
+                  string query = "SELECT * FROM user_info";
+
+                  using (MySqlCommand cmd = new MySqlCommand(query, con))
+                  using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                  {
+                      // Load data into a DataTable
+                      DataTable dataTable = new DataTable();
+                      adapter.Fill(dataTable);
+
+                      // Bind the DataTable to the DataGridView
+                      dataGridView1.ItemsSource = dataTable.DefaultView;
+                      con.Close();
+                  }
+
+
+              }
+              else if (table_name == "conform_sale")
+              {
+
+                  // Query to fetch all data from the selected table
+                  string query = "SELECT * FROM conform_sale";
+
+                  using (MySqlCommand cmd = new MySqlCommand(query, con))
+                  using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                  {
+                      // Load data into a DataTable
+                      DataTable dataTable = new DataTable();
+                      adapter.Fill(dataTable);
+
+                      // Bind the DataTable to the DataGridView
+                      dataGridView1.ItemsSource = dataTable.DefaultView;
+                      con.Close();
+                  }
+
+
+              }
+              else if (table_name == "crop_price")
+              {
+
+                  // Query to fetch all data from the selected table
+                  string query = "SELECT * FROM crop_price";
+
+                  using (MySqlCommand cmd = new MySqlCommand(query, con))
+                  using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                  {
+                      // Load data into a DataTable
+                      DataTable dataTable = new DataTable();
+                      adapter.Fill(dataTable);
+
+                      // Bind the DataTable to the DataGridView
+                      dataGridView1.ItemsSource = dataTable.DefaultView;
+                      con.Close();
+                  }
+
+
+              }
+              else
+              {
+                  MessageBox.Show("Please select a valid table name.");
+                  return;
+              }
+
+
+          }
+          catch (Exception ex)
+          {
+              MessageBox.Show($"An error occurred: {ex.Message}");
+          }
+  }
+
+  private void Button_Click_2(object sender, RoutedEventArgs e)
+  {
+      
+      dataGridView1.ItemsSource = "";
+
+  }
+
+  private void price_insert_button_Click(object sender, RoutedEventArgs e)
+  {
+      string pro = "server=localhost;user=root;database=project3104;password=";
+      MySqlConnection conn = new MySqlConnection(pro);
+      try
+      {
+
+          conn.Open();
+          MessageBox.Show("Successful");
+      }
+      catch (Exception ex)
+      {
+          MessageBox.Show(ex.Message);
+      }
+      finally { conn.Close(); }
+
+      string un = textbox5.Text;
+      string bid = textbox6.Text;
+      string n = textbox7.Text; 
+      string p = textbox8.Text;
+
+  
+      try
+      {
+          
+
+          conn.Open();
+          string ins = "insert into crop_price (User_Name,Business_id,Name,Crop_Name_price ) values ('" + un + "','" + bid + "','" + n + "','" + p + "')";
+          MySqlCommand cmd = new MySqlCommand(ins, conn);
+          int i = cmd.ExecuteNonQuery();
+          MessageBox.Show("Data has inserted successfully...");
+      }
+
+      catch (Exception ex)
+      {
+          MessageBox.Show(ex.Message);
+      }
+      finally { conn.Close(); }
+
+
+       textbox5.Text="";
+       textbox7.Text="";
+       textbox8.Text="";
+
+  }
+
+}
+}
 
 
 

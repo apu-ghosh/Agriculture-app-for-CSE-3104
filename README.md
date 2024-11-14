@@ -1,4 +1,96 @@
 # Agriculture-app-for-CSE-3104
+//
+---------------main window-----------------------
+
+public partial class MainWindow : Window
+{
+    string pro = "server=localhost;user=root;database=project3104;password=";
+    public MainWindow()
+    {
+        
+        InitializeComponent();
+    }
+    
+  
+    private void sign_up_button_Click(object sender, RoutedEventArgs e)
+    {
+        sign_up su = new sign_up();
+        su.Show();
+        this.Close();
+    }
+
+    private void admin_buttion_Click(object sender, RoutedEventArgs e)
+    {
+        
+            if (nid_number_box.Text == "" && password_box.Text == " ")
+            {
+                MessageBox.Show("Missing Information");
+            }
+            else if (nid_number_box.Text == "apu123" && password_box.Text == "2024")
+            {
+                admin_page ap = new admin_page();
+                ap.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Please Enter The Correct  Username And Password");
+            }
+        
+    }
+    private void login_button_Click(object sender, RoutedEventArgs e)
+ {
+     // Database connection string
+     
+     string pro = "server=localhost;user=root;database=project3104;password=";
+
+     string un = user_name.Text;
+     string pass = password.Text;
+
+         using (MySqlConnection conn = new MySqlConnection(pro))
+         {
+             try
+             {
+                 conn.Open();
+                
+                 string query = "SELECT COUNT(*) FROM  user_info where User_Name='" + un + "' && password='" + pass + "'";
+                 MySqlCommand cmdd = new MySqlCommand(query, conn);
+                 cmdd.Parameters.AddWithValue("@user_name", user_name);
+                 cmdd.Parameters.AddWithValue("@password", password); // In production, you should hash the password
+
+                 int userCount = Convert.ToInt32(cmdd.ExecuteScalar());
+
+                
+                 if (userCount>0)
+                 {
+                
+                   home_page hp = new home_page();
+                    hp.Show();
+                    this.Close();
+                 }
+                 else
+                 {
+                     MessageBox.Show("Invalid User_Name or password.", "Error");
+                 }
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show("Error: " + ex.Message);
+             }
+         }
+}
+
+}
+
+
+ 
+
+
+
+
+
+-----------------end main window----------------------
+
 Agriculture app
 -----------------sign up page-----------------
 using System;
@@ -277,96 +369,7 @@ public partial class admin_page : Window
 
 
 
----------------main window-----------------------
 
-public partial class MainWindow : Window
-{
-    string pro = "server=localhost;user=root;database=project3104;password=";
-    public MainWindow()
-    {
-        
-        InitializeComponent();
-    }
-    
-  
-    private void sign_up_button_Click(object sender, RoutedEventArgs e)
-    {
-        sign_up su = new sign_up();
-        su.Show();
-        this.Close();
-    }
-
-    private void admin_buttion_Click(object sender, RoutedEventArgs e)
-    {
-        
-            if (nid_number_box.Text == "" && password_box.Text == " ")
-            {
-                MessageBox.Show("Missing Information");
-            }
-            else if (nid_number_box.Text == "apu123" && password_box.Text == "2024")
-            {
-                admin_page ap = new admin_page();
-                ap.Show();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Please Enter The Correct  Username And Password");
-            }
-        
-    }
-    private void login_button_Click(object sender, RoutedEventArgs e)
- {
-     // Database connection string
-     
-     string pro = "server=localhost;user=root;database=project3104;password=";
-
-     string un = user_name.Text;
-     string pass = password.Text;
-
-         using (MySqlConnection conn = new MySqlConnection(pro))
-         {
-             try
-             {
-                 conn.Open();
-                
-                 string query = "SELECT COUNT(*) FROM  user_info where User_Name='" + un + "' && password='" + pass + "'";
-                 MySqlCommand cmdd = new MySqlCommand(query, conn);
-                 cmdd.Parameters.AddWithValue("@user_name", user_name);
-                 cmdd.Parameters.AddWithValue("@password", password); // In production, you should hash the password
-
-                 int userCount = Convert.ToInt32(cmdd.ExecuteScalar());
-
-                
-                 if (userCount>0)
-                 {
-                
-                   home_page hp = new home_page();
-                    hp.Show();
-                    this.Close();
-                 }
-                 else
-                 {
-                     MessageBox.Show("Invalid User_Name or password.", "Error");
-                 }
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show("Error: " + ex.Message);
-             }
-         }
-}
-
-}
-
-
- 
-
-
-
-
-
------------------end main window----------------------
 
 
 

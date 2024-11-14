@@ -1,5 +1,5 @@
 # Agriculture-app-for-CSE-3104
-
+// Agriculture app
 ---------------main window-----------------------
 
 public partial class MainWindow : Window
@@ -91,7 +91,9 @@ public partial class MainWindow : Window
 
 -----------------end main window----------------------
 
-// Agriculture app
+
+
+
 -----------------sign up page-----------------
 using System;
 using System.Collections.Generic;

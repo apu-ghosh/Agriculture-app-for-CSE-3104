@@ -64,7 +64,7 @@ namespace Agriculture_app
                // string ss = "server=localhost; user=root; database=project3104; password =";
 
                 conn.Open();
-                string ins = "insert into farmer_info (Name,Division,District,Thana,Mobile,NID_number) values ('" + n + "','" + div + "','" + dist + "','" + th + "','" + m + "','" + nid + "')";
+                string ins = "insert into user_info (Name,Division,District,Thana,Mobile,NID_number) values ('" + n + "','" + div + "','" + dist + "','" + th + "','" + m + "','" + nid + "')";
                 MySqlCommand cmd = new MySqlCommand(ins, conn);
                 int i = cmd.ExecuteNonQuery();
                 MessageBox.Show("Data has inserted successfully...");
@@ -206,14 +206,14 @@ public partial class admin_page : Window
         string s = "server= localhost; user= root; database= project3104; password =";
         MySqlConnection con = new MySqlConnection(s);
 
-        if (delete_data == "farmer_info")
+        if (delete_data == "user_info")
         {
 
             try
             {
                 con.Open();
                 MessageBox.Show("Successful");
-                string del = "delete from farmer_info where User_Name = '" + ddt + "'";
+                string del = "delete from user_info where User_Name = '" + ddt + "'";
                 MySqlCommand cmd = new MySqlCommand(del, con);
                 int i = cmd.ExecuteNonQuery();
             }
@@ -341,7 +341,7 @@ public partial class MainWindow : Window
                  conn.Open();
 
                  // Query to check if the email and password match
-                 string query = "SELECT COUNT(*) FROM farmer_info WHERE User_Name = @user_name AND Password = @password";
+                 string query = "SELECT COUNT(*) FROM user_info WHERE User_Name = @user_name AND Password = @password";
                  MySqlCommand cmd = new MySqlCommand(query, conn);
                  cmd.Parameters.AddWithValue("@user_name", user_name);
                  cmd.Parameters.AddWithValue("@password", password); // In production, you should hash the password

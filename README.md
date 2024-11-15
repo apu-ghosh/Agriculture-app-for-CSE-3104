@@ -115,6 +115,219 @@ public partial class MainWindow : Window
 
 
 
+-----------------financial_assistance ----------------
+
+public partial class financial_assistance : Window
+{
+    public financial_assistance()
+    {
+        InitializeComponent();
+    }
+
+    private void logout_button_Click(object sender, RoutedEventArgs e)
+    {
+        MainWindow hp = new MainWindow();
+        hp.Show();
+        this.Close();
+    }
+
+    private void back_button_Click(object sender, RoutedEventArgs e)
+    {
+        home_page hp = new home_page();
+        hp.Show();
+        this.Close();
+    }
+
+    private void show_button1_Click(object sender, RoutedEventArgs e)
+    {
+        var a = (ComboBoxItem)district_combobox.SelectedItem;
+        string district = (string)a.Content;
+
+        // Connection string
+        string connectionString = "server=localhost;user=root;database=project3104;password=";
+        using (MySqlConnection con = new MySqlConnection(connectionString))
+            try
+            {
+
+
+                if (district == "Jessore")
+                {
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT   Bank_Name,Bank_Manager,Mobile,District,Location,Lon_Status FROM financial_assistance WHERE  District='Jessore' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+
+                else if (district == "Bagerhat")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT   Bank_Name,Bank_Manager,Mobile,District,Location,Lon_Status FROM financial_assistance WHERE  District='Bagerhat' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else if (district == "Khulna")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT   Bank_Name,Bank_Manager,Mobile,District,Location,Lon_Status FROM financial_assistance WHERE  District='Khulna' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else if (district == "Gopalganj")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT   Bank_Name,Bank_Manager,Mobile,District,Location,Lon_Status FROM financial_assistance WHERE  District='Gopalganj' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else if (district == "Magura")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT   Bank_Name,Bank_Manager,Mobile,District,Location,Lon_Status FROM financial_assistance WHERE  District='Magura' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else if (district == "Jhenaidah")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT   Bank_Name,Bank_Manager,Mobile,District,Location,Lon_Status FROM financial_assistance WHERE  District='Jhenaidah' ";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else if (district == "Narail")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT   Bank_Name,Bank_Manager,Mobile,District,Location,Lon_Status FROM financial_assistance WHERE  District='Narail' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select a valid table name.");
+                    return;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+    }
+
+    private void clear_button_Click(object sender, RoutedEventArgs e)
+    {
+        dataGridView1.ItemsSource = "";
+        district_combobox.Text = "";
+    }
+}
+
+----------------end financial_assistance---------------
+
+
+
 
 -----------------sign up page-----------------
 using System;

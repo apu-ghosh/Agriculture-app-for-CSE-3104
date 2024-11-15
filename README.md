@@ -929,3 +929,518 @@ public partial class home_page : Window
      }
  }
 -------------------------end instruction page------------------------------
+
+
+-------------------------crop_sell_page page------------------------------
+
+ public partial class crop_sell_page : Window
+ {
+     public crop_sell_page()
+     {
+         InitializeComponent();
+     }
+
+     private void back_button_Click(object sender, RoutedEventArgs e)
+     {
+         home_page hp = new home_page();
+         hp.Show();
+         this.Close();
+     }
+
+     private void show_button1_Click(object sender, RoutedEventArgs e)
+     {
+         var a = (ComboBoxItem)combobox1.SelectedItem;
+         string thana = (string)a.Content;
+
+         // Connection string
+         string connectionString = "server=localhost;user=root;database=project3104;password=";
+         using (MySqlConnection con = new MySqlConnection(connectionString))
+             try
+             {
+
+
+                 if (thana == "Jessore")
+                 {
+                     con.Open();
+
+                     // Query to fetch all data from the selected table
+                     string query = "SELECT User_Name,Name,District FROM user_info WHERE Occupation= 'I am a Buyer' && Thana='Jessore' ";
+
+                     using (MySqlCommand cmd = new MySqlCommand(query, con))
+                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                     {
+                         // Load data into a DataTable
+                         DataTable dataTable = new DataTable();
+                         adapter.Fill(dataTable);
+
+                         // Bind the DataTable to the DataGridView
+                         dataGridView1.ItemsSource = dataTable.DefaultView;
+                         con.Close();
+                     }
+
+
+                 }
+
+                 else if (thana == "Bagerhat")
+                 {
+
+                     con.Open();
+
+                     // Query to fetch all data from the selected table
+                     string query = "SELECT User_Name,Name,District FROM user_info WHERE Occupation= 'I am a Buyer' && Thana='Bagerhat' ";
+
+                     using (MySqlCommand cmd = new MySqlCommand(query, con))
+                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                     {
+                         // Load data into a DataTable
+                         DataTable dataTable = new DataTable();
+                         adapter.Fill(dataTable);
+
+                         // Bind the DataTable to the DataGridView
+                         dataGridView1.ItemsSource = dataTable.DefaultView;
+                         con.Close();
+                     }
+
+
+                 }
+                 else if (thana == "Tala")
+                 {
+
+                     con.Open();
+
+                     // Query to fetch all data from the selected table
+                     string query = "SELECT User_Name,Name,District FROM user_info WHERE Occupation= 'I am a Buyer' && Thana='Tala' ";
+
+                     using (MySqlCommand cmd = new MySqlCommand(query, con))
+                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                     {
+                         // Load data into a DataTable
+                         DataTable dataTable = new DataTable();
+                         adapter.Fill(dataTable);
+
+                         // Bind the DataTable to the DataGridView
+                         dataGridView1.ItemsSource = dataTable.DefaultView;
+                         con.Close();
+                     }
+
+
+                 }
+                 else if (thana == "Sonadangha")
+                 {
+
+                     con.Open();
+
+                     // Query to fetch all data from the selected table
+                     string query = "SELECT User_Name,Name,District FROM user_info WHERE Occupation= 'I am a Buyer' && Thana='Sonadangha' ";
+
+                     using (MySqlCommand cmd = new MySqlCommand(query, con))
+                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                     {
+                         // Load data into a DataTable
+                         DataTable dataTable = new DataTable();
+                         adapter.Fill(dataTable);
+
+                         // Bind the DataTable to the DataGridView
+                         dataGridView1.ItemsSource = dataTable.DefaultView;
+                         con.Close();
+                     }
+
+
+                 }
+                 else if (thana == "Rupsa")
+                 {
+
+                     con.Open();
+
+                     // Query to fetch all data from the selected table
+                     string query = "SELECT User_Name,Name,District FROM user_info WHERE Occupation= 'I am a Buyer' && Thana='Rupsa' ";
+
+                     using (MySqlCommand cmd = new MySqlCommand(query, con))
+                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                     {
+                         // Load data into a DataTable
+                         DataTable dataTable = new DataTable();
+                         adapter.Fill(dataTable);
+
+                         // Bind the DataTable to the DataGridView
+                         dataGridView1.ItemsSource = dataTable.DefaultView;
+                         con.Close();
+                     }
+
+
+                 }
+                 else if (thana == "Batiaghata")
+                 {
+
+                     con.Open();
+
+                     // Query to fetch all data from the selected table
+                     string query = "SELECT User_Name,Name,District FROM user_info WHERE Occupation= 'I am a Buyer' && Thana='Batiaghata' ";
+
+                     using (MySqlCommand cmd = new MySqlCommand(query, con))
+                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                     {
+                         // Load data into a DataTable
+                         DataTable dataTable = new DataTable();
+                         adapter.Fill(dataTable);
+
+                         // Bind the DataTable to the DataGridView
+                         dataGridView1.ItemsSource = dataTable.DefaultView;
+                         con.Close();
+                     }
+
+
+                 }
+                 else if (thana == "Paikgachha")
+                 {
+
+                     con.Open();
+
+                     // Query to fetch all data from the selected table
+                     string query = "SELECT User_Name,Name,District FROM user_info WHERE Occupation= 'I am a Buyer' && Thana='Paikgachha' ";
+
+                     using (MySqlCommand cmd = new MySqlCommand(query, con))
+                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                     {
+                         // Load data into a DataTable
+                         DataTable dataTable = new DataTable();
+                         adapter.Fill(dataTable);
+
+                         // Bind the DataTable to the DataGridView
+                         dataGridView1.ItemsSource = dataTable.DefaultView;
+                         con.Close();
+                     }
+
+
+                 }
+                 else
+                 {
+                     MessageBox.Show("Please select a valid table name.");
+                     return;
+                 }
+
+
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show($"An error occurred: {ex.Message}");
+             }
+     }
+
+     private void show_button2_Click(object sender, RoutedEventArgs e)
+     {
+         
+
+         
+         string un = username_text.Text;
+
+         // Connection string
+         string connectionString = "server=localhost;user=root;database=project3104;password=";
+         using (MySqlConnection con = new MySqlConnection(connectionString))
+             try
+             {
+
+               
+                     con.Open();
+
+
+                     // Query to fetch all data from the selected table
+                     string query = "SELECT Business_id,Name,Crop_Name_price FROM crop_price WHERE User_Name= '" + un + "' ";
+
+                 using (MySqlCommand cmd = new MySqlCommand(query, con))
+                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                     {
+                         // Load data into a DataTable
+                         DataTable dataTable = new DataTable();
+                         adapter.Fill(dataTable);
+
+                         // Bind the DataTable to the DataGridView
+                         dataGridView2.ItemsSource = dataTable.DefaultView;
+                         con.Close();
+                     }
+ 
+
+
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show($"An error occurred: {ex.Message}");
+             }
+     }
+
+     private void sale_button_Click(object sender, RoutedEventArgs e)
+     {
+         string pro = "server=localhost;user=root;database=project3104;password=";
+         MySqlConnection conn = new MySqlConnection(pro);
+         try
+         {
+
+             conn.Open();
+             MessageBox.Show("Successful");
+         }
+         catch (Exception ex)
+         {
+             MessageBox.Show(ex.Message);
+         }
+         finally { conn.Close(); }
+
+         
+         
+
+         string fu = farmer_username.Text;
+         string bid = businessid_text.Text;
+
+         
+
+
+         try
+         {
+             // string ss = "server=localhost; user=root; database=project3104; password =";
+
+             conn.Open();
+             string ins = "insert into conform_sale (User_Name,Business_id) values ('" + fu + "','" + bid + "')";
+             MySqlCommand cmd = new MySqlCommand(ins, conn);
+             int i = cmd.ExecuteNonQuery();
+             MessageBox.Show("Data has inserted successfully...");
+         }
+
+         catch (Exception ex)
+         {
+             MessageBox.Show(ex.Message);
+         }
+         finally { conn.Close(); }
+
+          farmer_username.Text="";
+          businessid_text.Text = "";
+     }
+
+     private void Button_Click(object sender, RoutedEventArgs e)
+     {
+         MainWindow mw = new MainWindow();
+         mw.Show();
+         this.Close();
+     }
+
+     private void Button_Click_1(object sender, RoutedEventArgs e)
+     {
+         dataGridView1.ItemsSource = "";
+         dataGridView2.ItemsSource = "";
+         username_text.Text = "";
+         combobox1.SelectedItem = "";
+
+     }
+ }
+-------------------------End crop_sell_page ------------------------------
+
+
+-------------------------start advice_page ------------------------------
+
+public partial class advice_page : Window
+{
+    public advice_page()
+    {
+        InitializeComponent();
+    }
+
+    private void back_button_Click(object sender, RoutedEventArgs e)
+    {
+        home_page hp = new home_page();
+        hp.Show();
+        this.Close();
+    }
+
+    private void show_button1_Click(object sender, RoutedEventArgs e)
+    {
+        var a = (ComboBoxItem)combobox1.SelectedItem;
+        string thana = (string)a.Content;
+
+        // Connection string
+        string connectionString = "server=localhost;user=root;database=project3104;password=";
+        using (MySqlConnection con = new MySqlConnection(connectionString))
+            try
+            {
+
+
+                if (thana == "Jessore")
+                {
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT Name,Division,District,Mobile FROM user_info WHERE Occupation= 'I am a Agriculture officer' && Thana='Jessore' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+
+                else if (thana == "Bagerhat")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT Name,Division,District,Mobile FROM user_info WHERE Occupation= 'I am a Agriculture officer' && Thana='Bagerhat' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else if (thana == "Tala")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT Name,Division,District,Mobile FROM user_info WHERE Occupation= 'I am a Agriculture officer' && Thana='Tala' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else if (thana == "Sonadangha")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT Name,Division,District,Mobile FROM user_info WHERE Occupation= 'I am a Agriculture officer' && Thana='Sonadangha' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else if (thana == "Rupsa")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT Name,Division,District,Mobile FROM user_info WHERE Occupation= 'I am a Agriculture officer' && Thana='Rupsa' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else if (thana == "Batiaghata")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT Name,Division,District,Mobile FROM user_info WHERE Occupation= 'I am a Agriculture officer' && Thana='Batiaghata' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else if (thana == "Paikgachha")
+                {
+
+                    con.Open();
+
+                    // Query to fetch all data from the selected table
+                    string query = "SELECT Name,Division,District,Mobile FROM user_info WHERE Occupation= 'I am a Agriculture officer' && Thana='Paikgachha' ";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))
+                    {
+                        // Load data into a DataTable
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Bind the DataTable to the DataGridView
+                        dataGridView1.ItemsSource = dataTable.DefaultView;
+                        con.Close();
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select a valid table name.");
+                    return;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+    }
+
+    private void logout_button_Click(object sender, RoutedEventArgs e)
+    {
+        MainWindow mw = new MainWindow();
+        mw.Show();
+        this.Close();
+    }
+
+    private void clear_button_Click(object sender, RoutedEventArgs e)
+    {
+        combobox1.Text = "";
+        dataGridView1.ItemsSource = "";
+    }
+}
+
+-------------------------End advice_page ------------------------------
